@@ -3,6 +3,8 @@ import styled from "styled-components";
 import FEIlogo from "../img/FEIlogo.svg";
 import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 
+import { science, religion } from "./database";
+
 const TextGenerator = () => {
   const [paragraphs, setParagraphs] = useState(1);
   const [textArr, setTextArr] = useState([]);
@@ -32,22 +34,43 @@ const TextGenerator = () => {
 
     const paragraphsArr = [];
 
-    if (startFrom && !starterUsed) {
-      let paragraph = "";
-      paragraph += "NASA kłamie... ";
-      const paragraphLength = [3, 6, 9];
-      const randomParagraph =
-        paragraphLength[Math.floor(Math.random(1, 5)) - 1];
-    } else {
-      let paragraph = "";
-      const paragraphLength = [3, 6, 9];
-      const randomParagraph =
-        paragraphLength[Math.floor(Math.random(1, 5)) - 1];
+    if (type == "science") {
+      for (let i = 0; i < numOfParagraphs; i++) {
+        if (startFrom && !starterUsed) {
+          let paragraph = "NASA kłamie... ";
+          const randomParagraph =
+            science[Math.floor(Math.random() * (science.length - 1 + 1))];
+          paragraph += randomParagraph;
+          paragraphsArr.push(paragraph);
+          starterUsed = true;
+        } else {
+          const randomParagraph =
+            science[Math.floor(Math.random() * (science.length - 1 + 1))];
+          paragraphsArr.push(randomParagraph);
+        }
+      }
+    }
+    if (type == "religion") {
+      for (let i = 0; i < numOfParagraphs; i++) {
+        if (startFrom && !starterUsed) {
+          let paragraph = "NASA kłamie... ";
+          const randomParagraph =
+            religion[Math.floor(Math.random() * (religion.length - 1 + 1))];
+          paragraph += randomParagraph;
+          paragraphsArr.push(paragraph);
+          starterUsed = true;
+        } else {
+          const randomParagraph =
+            religion[Math.floor(Math.random() * (religion.length - 1 + 1))];
+          paragraphsArr.push(randomParagraph);
+        }
+      }
     }
 
-    console.log(
-      `Paragraphs: ${numOfParagraphs}, Type: ${type}, StartFrom: ${startFrom}`
-    );
+    // console.log(
+    //   `Paragraphs: ${numOfParagraphs}, Type: ${type}, StartFrom: ${startFrom}`
+    // );
+    setTextArr(paragraphsArr);
   };
   return (
     <Generator>
@@ -85,7 +108,7 @@ const TextGenerator = () => {
                 <select id="typeSelection" ref={typeRef}>
                   <option value="mixed">Mieszany</option>
                   <option value="science">Pseudonaukowy</option>
-                  <option value="faith">Pseudoreligijny</option>
+                  <option value="religion">Pseudoreligijny</option>
                 </select>
                 <span>
                   <input type="checkbox" ref={checkboxRef} />
@@ -102,34 +125,9 @@ const TextGenerator = () => {
       <div className="GeneratedText">
         {textArr.length > 0 && (
           <div>
-            <p>
-              Cow queso cheesy feet. Macaroni cheese cow cheesy feet feta
-              bocconcini red leicester melted cheese pecorino. Fondue feta
-              cheese on toast say cheese say cheese edam bocconcini cheesy feet.
-              Blue castello who moved my cheese roquefort. Danish fontina chalk
-              and cheese airedale. Boursin st. agur blue cheese cheese slices
-              cheese and biscuits bocconcini smelly cheese manchego halloumi.
-              When the cheese comes out everybody's happy lancashire squirty
-              cheese ricotta mozzarella rubber cheese the big cheese lancashire.
-              Bavarian bergkase monterey jack hard cheese ricotta cheese on
-              toast bavarian bergkase mascarpone parmesan. Cheesy feet stilton
-              melted cheese. Cheese triangles brie cheesy feet. Croque monsieur
-              caerphilly paneer cheesecake taleggio airedale fondue feta.
-              Cheeseburger who moved my cheese melted cheese roquefort
-              caerphilly cheese on toast goat camembert de normandie. Manchego
-              melted cheese cheese and biscuits cauliflower cheese airedale
-              squirty cheese boursin feta. Macaroni cheese caerphilly.
-              Cheesecake ricotta ricotta. Chalk and cheese roquefort stilton
-              fromage fromage frais lancashire cheesy feet pepper jack. Macaroni
-              cheese the big cheese dolcelatte cheddar who moved my cheese
-              monterey jack stinking bishop bavarian bergkase. Rubber cheese
-              hard cheese cheesy feet cut the cheese parmesan squirty cheese.
-              Squirty cheese stilton fromage. Taleggio who moved my cheese brie
-              boursin cauliflower cheese stilton boursin jarlsberg. Danish
-              fontina queso bavarian bergkase manchego queso feta queso cheese
-              and wine. Mascarpone goat swiss stilton red leicester goat
-              emmental swiss. Macaroni cheese blue castello stilton jarlsberg.
-            </p>
+            {textArr.map((el, index) => (
+              <p key={index}>{el}</p>
+            ))}
           </div>
         )}
       </div>
