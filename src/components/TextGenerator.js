@@ -138,12 +138,13 @@ const TextGenerator = () => {
                     value={paragraphs}
                     ref={paragraphsRef}
                     readOnly
+                    data-testid="paragraphCounter"
                   />
                   <div className="AppHead-form-options-form-paragraphs-num-arrows">
-                    <button onClick={(e) => increment(e)}>
+                    <button data-testid="incBtn" onClick={(e) => increment(e)}>
                       <FiArrowUp />
                     </button>
-                    <button onClick={(e) => decrement(e)}>
+                    <button data-testid="decBtn" onClick={(e) => decrement(e)}>
                       <FiArrowDown />
                     </button>
                   </div>
@@ -151,26 +152,36 @@ const TextGenerator = () => {
               </div>
               <div className="AppHead-form-options-form-types">
                 <label htmlFor="typeSelection">Wybierz typ: </label>
-                <select id="typeSelection" ref={typeRef}>
+                <select
+                  id="typeSelection"
+                  data-testid="selectOption"
+                  ref={typeRef}
+                >
                   <option value="mixed">Mieszany</option>
                   <option value="science">Pseudonaukowy</option>
                   <option value="religion">Pseudoreligijny</option>
                 </select>
                 <span>
-                  <input type="checkbox" ref={checkboxRef} />
+                  <input
+                    type="checkbox"
+                    data-testid="checkOption"
+                    ref={checkboxRef}
+                  />
                   Zacznij od "NASA kłamie... "
                 </span>
               </div>
             </div>
             <div className="AppHead-form-options-submit">
-              <button type="submit">Usmaż naleśnika</button>
+              <button data-testid="submitBtn" type="submit">
+                Usmaż naleśnika
+              </button>
             </div>
           </form>
         </div>
       </div>
-      <div className="GeneratedText">
+      <div className="GeneratedText" data-testid="textContainer">
         {textArr.length > 0 && (
-          <div>
+          <div data-testid="textContainer-paragraphs">
             {textArr.map((el, index) => (
               <p key={index}>{el}</p>
             ))}

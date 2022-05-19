@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import GlobalStyle from "./components/GlobalStyle";
-import Header from "./components/Header";
 import TextGenerator from "./components/TextGenerator";
 import FEIico from "./img/FEIico.png";
 
