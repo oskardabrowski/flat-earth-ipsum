@@ -31,9 +31,54 @@ const TextGenerator = () => {
     const type = typeRef.current.value;
     const startFrom = checkboxRef.current.checked;
     let starterUsed = false;
+    let scienceUsed = false;
 
     const paragraphsArr = [];
 
+    if (type == "mixed") {
+      for (let i = 0; i < numOfParagraphs; i++) {
+        if (startFrom && !starterUsed) {
+          const startFrom = Math.floor(Math.random() * 2);
+          if (startFrom === 0) {
+            let paragraph = "NASA kłamie... ";
+            const randomParagraph =
+              science[Math.floor(Math.random() * (science.length - 1 + 1))];
+            paragraph += randomParagraph;
+            paragraphsArr.push(paragraph);
+            starterUsed = true;
+            scienceUsed = true;
+          } else if (startFrom === 1) {
+            let paragraph = "NASA kłamie... ";
+            const randomParagraph =
+              religion[Math.floor(Math.random() * (religion.length - 1 + 1))];
+            paragraph += randomParagraph;
+            paragraphsArr.push(paragraph);
+            starterUsed = true;
+            scienceUsed = false;
+          } else {
+            let paragraph = "NASA kłamie... ";
+            const randomParagraph =
+              science[Math.floor(Math.random() * (science.length - 1 + 1))];
+            paragraph += randomParagraph;
+            paragraphsArr.push(paragraph);
+            starterUsed = true;
+            scienceUsed = true;
+          }
+        } else {
+          if (!scienceUsed) {
+            const randomParagraph =
+              science[Math.floor(Math.random() * (science.length - 1 + 1))];
+            paragraphsArr.push(randomParagraph);
+            scienceUsed = true;
+          } else {
+            const randomParagraph =
+              religion[Math.floor(Math.random() * (religion.length - 1 + 1))];
+            paragraphsArr.push(randomParagraph);
+            scienceUsed = false;
+          }
+        }
+      }
+    }
     if (type == "science") {
       for (let i = 0; i < numOfParagraphs; i++) {
         if (startFrom && !starterUsed) {
@@ -92,6 +137,7 @@ const TextGenerator = () => {
                     type="number"
                     value={paragraphs}
                     ref={paragraphsRef}
+                    readOnly
                   />
                   <div className="AppHead-form-options-form-paragraphs-num-arrows">
                     <button onClick={(e) => increment(e)}>
@@ -132,7 +178,7 @@ const TextGenerator = () => {
         )}
       </div>
       <footer className="Footer">
-        <div>Copyright &copy; Oskar Dąbrowski {new Date().getFullYear()}</div>
+        <div>Flat Earth Ipsum by Oskar Dąbrowski</div>
       </footer>
     </Generator>
   );
