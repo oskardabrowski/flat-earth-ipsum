@@ -141,10 +141,18 @@ const TextGenerator = () => {
                     data-testid="paragraphCounter"
                   />
                   <div className="AppHead-form-options-form-paragraphs-num-arrows">
-                    <button data-testid="incBtn" onClick={(e) => increment(e)}>
+                    <button
+                      data-testid="incBtn"
+                      id="incBtn"
+                      onClick={(e) => increment(e)}
+                    >
                       <FiArrowUp />
                     </button>
-                    <button data-testid="decBtn" onClick={(e) => decrement(e)}>
+                    <button
+                      data-testid="decBtn"
+                      id="decBtn"
+                      onClick={(e) => decrement(e)}
+                    >
                       <FiArrowDown />
                     </button>
                   </div>
@@ -165,6 +173,7 @@ const TextGenerator = () => {
                   <input
                     type="checkbox"
                     data-testid="checkOption"
+                    id="checkOption"
                     ref={checkboxRef}
                   />
                   Zacznij od "NASA kłamie... "
@@ -172,7 +181,7 @@ const TextGenerator = () => {
               </div>
             </div>
             <div className="AppHead-form-options-submit">
-              <button data-testid="submitBtn" type="submit">
+              <button data-testid="submitBtn" id="submitBtn" type="submit">
                 Usmaż naleśnika
               </button>
             </div>
@@ -181,7 +190,10 @@ const TextGenerator = () => {
       </div>
       <div className="GeneratedText" data-testid="textContainer">
         {textArr.length > 0 && (
-          <div data-testid="textContainer-paragraphs">
+          <div
+            data-testid="textContainer-paragraphs"
+            id="textContainer-paragraphs"
+          >
             {textArr.map((el, index) => (
               <p key={index}>{el}</p>
             ))}
